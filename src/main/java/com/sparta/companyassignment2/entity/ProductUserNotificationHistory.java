@@ -1,9 +1,12 @@
 package com.sparta.companyassignment2.entity;
 
+import com.sparta.companyassignment2.enums.TransferStatus;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "productUserNotificationHistory")
+@NoArgsConstructor
 public class ProductUserNotificationHistory extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +22,13 @@ public class ProductUserNotificationHistory extends BaseTime{
     private Integer restockRound;
 
     @Column
-    private String transferStatus;
+    @Enumerated(EnumType.STRING)
+    private TransferStatus transferStatus;
+
+    public ProductUserNotificationHistory(Long productId, int restock, TransferStatus status, User user) {
+        this.productId = productId;
+        this.userId = user.getId();
+        this.restockRound = restock;
+        this.transferStatus = status;
+    }
 }
