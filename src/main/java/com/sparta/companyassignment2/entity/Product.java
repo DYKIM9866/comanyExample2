@@ -6,10 +6,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "product")
-public class Product extends BaseTime{
+public class Product extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "restockRound", nullable = false)
+    private Integer restockRound;
 
     @Column(name = "stock", nullable = false)
     private Integer stock;
