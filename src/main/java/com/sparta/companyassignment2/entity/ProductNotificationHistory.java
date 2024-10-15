@@ -14,8 +14,9 @@ public class ProductNotificationHistory extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product productId;
 
     @Column(nullable = false)
     private Integer restockRound;
@@ -27,8 +28,14 @@ public class ProductNotificationHistory extends BaseTime {
     private Long lastTransferUserId;
 
 
-    public ProductNotificationHistory(Long productId, int restockRound, int restockCnt) {
-        this.productId = productId;
+    public ProductNotificationHistory(Product product, int restockRound, TransferStatus transferStatus) {
+        this.productId = product;
         this.restockRound = restockRound;
+        this.transferStatus = transferStatus;
+    }
+
+    public void stopTransfer(Long lastTransferUserId, TransferStatus transferStatus) {
+        this.lastTransferUserId = lastTransferUserId;
+        this.transferStatus = transferStatus;
     }
 }

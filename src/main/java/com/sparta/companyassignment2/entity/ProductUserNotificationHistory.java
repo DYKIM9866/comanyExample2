@@ -1,6 +1,5 @@
 package com.sparta.companyassignment2.entity;
 
-import com.sparta.companyassignment2.enums.TransferStatus;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
@@ -27,9 +26,10 @@ public class ProductUserNotificationHistory extends BaseTime {
     private LocalDateTime transferDateTime;
 
 
-    public ProductUserNotificationHistory(Long productId, int restock, TransferStatus status, User user) {
+    public ProductUserNotificationHistory(Long productId, Long userId, Integer restockRound, LocalDateTime now) {
         this.productId = productId;
-        this.userId = user.getId();
-        this.restockRound = restock;
+        this.userId = userId;
+        this.restockRound = restockRound;
+        this.transferDateTime = now;
     }
 }

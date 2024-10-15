@@ -19,6 +19,6 @@ public class RestockController {
     @PostMapping("/{productId}/notifications/re-stock")
     public String transferNotification(@PathVariable Long productId){
         restockService.transfer(productId);
-        return "";
+        return "redirect:/";
     }
 }
